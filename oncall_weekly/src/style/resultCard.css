@@ -11,7 +11,7 @@
 }
 
 .resultados-card h2 {
-  color: #ff3366;
+  color: hsl(2, 83%, 41%);
   margin-bottom: 15px;
   text-align: center;
 }
@@ -22,11 +22,10 @@
 }
 
 .semana-item {
-  background: #262626;
-  border-left: 4px solid #ff0055;
+  /* background: #262626; */
   border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 12px;
+  /* padding: 10px; */
+  /* margin-bottom: 12px; */
   font-size: 0.9rem;
 }
 
@@ -38,24 +37,11 @@
 
 .fechas {
   font-weight: bold;
-}
-/* 
-.delete-btn {
-  background: transparent;
-  border: none;
-  color: #ff5555;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.2s;
+  font-size: 20px;
 }
 
-.delete-btn:hover {
-  color: #ff7777;
-  transform: scale(1.1);
-} */
 
 /* ---------------------Btn-------------------------------- */
-/* From Uiverse.io by vinodjangid07 */ 
 .button {
   margin-top: 15px;
   width: 50px;
@@ -101,6 +87,12 @@
   transform: translateY(60%);
 }
 
+.button:hover {
+  background-color: hsl(2, 83%, 41%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(255, 69, 69) 0px 7px 29px 0px;
+}
+
 .button::before {
   position: absolute;
   top: -20px;
@@ -115,6 +107,15 @@
   opacity: 1;
   transform: translateY(30px);
   transition-duration: .3s;
+}
+
+.button:active {
+  letter-spacing: 3px;
+  background-color: hsl(2, 83%, 41%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(255, 69, 69) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
 }
 /* ---------------------Btn-------------------------------- */
 

@@ -12,12 +12,12 @@
 
 h1 {
   text-align: center;
-  color: #ff0055;
+  color: hsl(2, 83%, 41%);
   font-size: 1.4rem;
 }
 
 .form-section h2 {
-  color: #ff3366;
+  color: hsl(2, 83%, 41%);
   font-size: 1rem;
   margin-bottom: 5px;
 }
