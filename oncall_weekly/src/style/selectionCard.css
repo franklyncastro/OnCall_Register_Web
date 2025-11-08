@@ -1,0 +1,52 @@
+
+.seleccion-card {
+ width: 350px;
+ height: fit-content;
+ padding: 25px;
+ border-radius: 30px;
+ background: #212121;
+ box-shadow: 15px 15px 30px rgb(25, 25, 25),
+             -15px -15px 30px rgb(60, 60, 60);
+}
+
+
+h1 {
+  text-align: center;
+  color: #ff0055;
+  font-size: 1.4rem;
+}
+
+.form-section h2 {
+  color: #ff3366;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+select, input {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #2a2a2a;
+  color: white;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* ----------------Boton----------------- */
+button {
+  width: 100%;
+  padding: 10px;
+  background: #ff0055;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+button:hover {
+  background: #ff3366;
+}

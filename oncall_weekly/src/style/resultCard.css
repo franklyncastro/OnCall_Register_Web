@@ -1,0 +1,133 @@
+.resultados-card {
+ margin-top: 40px;
+ width: 350px;
+ height: fit-content;
+ padding: 25px;
+ border-radius: 30px;
+ background: #212121;
+ box-shadow: 15px 15px 30px rgb(25, 25, 25),
+             -15px -15px 30px rgb(60, 60, 60);
+
+}
+
+.resultados-card h2 {
+  color: #ff3366;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.vacio {
+  opacity: 0.7;
+  text-align: center;
+}
+
+.semana-item {
+  background: #262626;
+  border-left: 4px solid #ff0055;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.semana-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fechas {
+  font-weight: bold;
+}
+/* 
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #ff5555;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  color: #ff7777;
+  transform: scale(1.1);
+} */
+
+/* ---------------------Btn-------------------------------- */
+/* From Uiverse.io by vinodjangid07 */ 
+.button {
+  margin-top: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: .3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.svgIcon {
+  width: 12px;
+  transition-duration: .3s;
+}
+
+.svgIcon path {
+  fill: white;
+}
+
+.button:hover {
+  width: 90px;
+  border-radius: 50px;
+  transition-duration: .3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.button:hover .svgIcon {
+  width: 50px;
+  transition-duration: .3s;
+  transform: translateY(60%);
+}
+
+.button::before {
+  position: absolute;
+  top: -20px;
+  content: "Delete";
+  color: white;
+  transition-duration: .3s;
+  font-size: 2px;
+}
+
+.button:hover::before {
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(30px);
+  transition-duration: .3s;
+}
+/* ---------------------Btn-------------------------------- */
+
+.departamentos {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    padding-top: 10px;
+    margin-top: 5px;
+    
+}
+
+.dep {
+  background: #333;
+  padding: 5px 8px;
+  border-radius: 6px;
+  margin-top: 4px;
+  width: 100%;
+}
