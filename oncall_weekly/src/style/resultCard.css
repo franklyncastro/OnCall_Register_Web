@@ -87,8 +87,12 @@
   width: 90px;
   border-radius: 50px;
   transition-duration: .3s;
-  background-color: rgb(255, 69, 69);
+  background-color: hsl(2, 83%, 41%);
   align-items: center;
+
+  /* background-color: hsl(261deg 80% 48%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 7px 29px 0px; */
 }
 
 .button:hover .svgIcon {

@@ -22,20 +22,29 @@ h1 {
   margin-bottom: 5px;
 }
 
+
 select, input {
+  color: #fff;
+  font-size: 0.9rem;
+  background-color: transparent;
   width: 100%;
-  padding: 6px;
+  box-sizing: border-box;
+  padding-inline: 0.5em;
+  padding-block: 0.7em;
+  border: none;
+  border-bottom: var(--border-height) solid var(--border-before-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
   margin-bottom: 10px;
   border-radius: 8px;
   border: none;
   background: #2a2a2a;
-  color: white;
-  font-size: 0.9rem;
+  font-size: 1rem;
   text-align: center;
 }
 
 /* ----------------Boton----------------- */
-button {
+/* button {
   width: 100%;
   padding: 10px;
   background: #ff0055;
@@ -49,4 +58,35 @@ button {
 
 button:hover {
   background: #ff3366;
+} */
+
+/* From Uiverse.io by barisdogansutcu */ 
+.btn1{
+  padding: 17px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+  
+}
+
+.btn1:hover {
+  letter-spacing: 3px;
+  background-color: hsl(2, 83%, 41%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(255, 69, 69) 0px 7px 29px 0px;
+}
+
+.btn1:active {
+  letter-spacing: 3px;
+  background-color: hsl(2, 83%, 41%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(255, 69, 69) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
 }

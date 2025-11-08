@@ -81,7 +81,7 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
         />
       </div>
 
-      <button onClick={manejarGuardar}>Guardar Semana</button>
+      <button class="btn1" onClick={manejarGuardar}>Registrar</button>
     </div>
   );
 }

@@ -10,7 +10,7 @@ function ResultadosCard({ asignaciones, setAsignaciones }) {
 
   return (
     <div className="resultados-card">
-      <h2>Semanas Asignadas</h2>
+      <h2>Personal de OnCall</h2>
       {asignaciones.length === 0 ? (
         <p className="vacio">No hay registros aún.</p>
       ) : (
