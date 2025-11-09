@@ -1,16 +1,19 @@
 body {
-  font-family: 'Segoe UI', sans-serif;/* background: #0f0f0f; */
   color: #fff;
   margin: 0;
   padding: 0;
   text-align: center;
+
+  /* font */
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 300;
 }
 
 .main-container {
-  padding-top: 30px;
-  /*display: flex;
-  justify-content: center;
-  *//*display: flex;
-  */
- 
+  /* padding-top: 30px; */
+  /* margin: 10px; */
 }

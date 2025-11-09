@@ -10,7 +10,7 @@ function ResultadosCard({ asignaciones, setAsignaciones }) {
 
   return (
     <div className="resultados-card">
-      <h2>Personal de OnCall</h2>
+      <h2>OnCall de la Semana</h2>
       {asignaciones.length === 0 ? (
         <p className="vacio">No hay registros aún.</p>
       ) : (
@@ -18,7 +18,7 @@ function ResultadosCard({ asignaciones, setAsignaciones }) {
           <div className="semana-item" key={semana.id}>
             <div className="semana-info">
               <span className="fechas">
-                {semana.inicio} → {semana.fin}
+                {semana.inicio} hasta {semana.fin}
               </span>
               
             </div>

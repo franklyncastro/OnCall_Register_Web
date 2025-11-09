@@ -4,13 +4,11 @@ import SeleccionCard from "./components/SeleccionCard/SeleccionCard";
 import ResultadosCard from "./components/ResultadosCard/ResultadosCard";
 
 function App() {
-  const [asignaciones, setAsignaciones] = useState([]);
-
-  // Cargar del localStorage
-  useEffect(() => {
+  // Inicializamos leyendo directamente del localStorage (mejor rendimiento)
+  const [asignaciones, setAsignaciones] = useState(() => {
     const dataGuardada = localStorage.getItem("asignaciones");
-    if (dataGuardada) setAsignaciones(JSON.parse(dataGuardada));
-  }, []);
+    return dataGuardada ? JSON.parse(dataGuardada) : [];
+  });
 
   // Guardar en localStorage cada vez que cambien
   useEffect(() => {
@@ -19,10 +17,17 @@ function App() {
 
   return (
     <div className="main-container">
-      <SeleccionCard asignaciones={asignaciones} setAsignaciones={setAsignaciones} />
-      <ResultadosCard asignaciones={asignaciones} setAsignaciones={setAsignaciones} />
+      <SeleccionCard
+        asignaciones={asignaciones}
+        setAsignaciones={setAsignaciones}
+      />
+      <ResultadosCard
+        asignaciones={asignaciones}
+        setAsignaciones={setAsignaciones}
+      />
     </div>
   );
 }
 
 export default App;
+

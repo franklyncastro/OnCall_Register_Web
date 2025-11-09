@@ -33,7 +33,7 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
 
   return (
     <div className="seleccion-card">
-      <h1>Asignación On-Call</h1>
+      <h1>Asignación On-Call App</h1>
 
       <div className="form-section">
         <h2>Switch</h2>
