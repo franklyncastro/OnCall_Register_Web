@@ -1,6 +1,5 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  /* background: #0f0f0f; */
+  font-family: 'Segoe UI', sans-serif;/* background: #0f0f0f; */
   color: #fff;
   margin: 0;
   padding: 0;
@@ -8,7 +7,7 @@ body {
 }
 
 .main-container {
-  padding-top: 70px;
+  padding-top: 30px;
   /*display: flex;
   justify-content: center;
   *//*display: flex;

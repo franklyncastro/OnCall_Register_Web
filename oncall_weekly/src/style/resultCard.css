@@ -3,10 +3,22 @@
  width: 350px;
  height: fit-content;
  padding: 25px;
- border-radius: 30px;
- background: #212121;
- box-shadow: 15px 15px 30px rgb(25, 25, 25),
+ /* border-radius: 30px; */
+ /* background: #212121; */
+ /* box-shadow: 15px 15px 30px rgb(25, 25, 25),
+             -15px -15px 30px rgb(60, 60, 60); */
+
+}
+
+.resultados-card:hover{
+  width: 350px; 
+  transition-duration: .3s;
+  padding: 25px; 
+  border-radius: 30px;
+  background: #212121;
+  box-shadow: 15px 15px 30px rgb(25, 25, 25),
              -15px -15px 30px rgb(60, 60, 60);
+             
 
 }
 
@@ -135,4 +147,14 @@
   border-radius: 6px;
   margin-top: 4px;
   width: 100%;
+  font-size: 25px;
+}
+
+.dep:hover {
+  background: hsl(2, 83%, 41%);
+  padding: 5px 8px;
+  border-radius: 6px;
+  margin-top: 4px;
+  width: 100%;
+  font-size: 25px;
 }
