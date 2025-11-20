@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 import "../../style/selectionCard.css";
 
 function SeleccionCard({ asignaciones, setAsignaciones }) {
@@ -11,8 +12,13 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
   const [fechaFin, setFechaFin] = useState("");
 
   const manejarGuardar = () => {
+
     if (!switchPerson || !corePerson || !fechaInicio || !fechaFin) {
-      alert("Completa todos los campos antes de guardar.");
+      Swal.fire({
+        icon: "error",
+        title: "Campos incompletos",
+        text: "Completa todos los campos antes de guardar.",
+      });
       return;
     }
 
@@ -25,6 +31,17 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
     };
 
     setAsignaciones([...asignaciones, nuevaSemana]);
+
+    // ALERTA DE REGISTRO EXITOSO
+    Swal.fire({
+      icon: "success",
+      title: "Registro exitoso",
+      text: "La asignación ha sido registrada correctamente.",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+
+    // Limpiar campos
     setSwitchPerson("");
     setCorePerson("");
     setFechaInicio("");
@@ -33,7 +50,7 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
 
   return (
     <div className="seleccion-card">
-      <h1>Asignación On-Call App</h1>
+      <h1><i className="fa-etch fa-solid fa-laptop"></i> On-Call App</h1>
 
       <div className="form-section">
         <h2>Switch</h2>
@@ -81,7 +98,7 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
         />
       </div>
 
-      <button class="btn1" onClick={manejarGuardar}>Registrar</button>
+      <button className="btn1" onClick={manejarGuardar}>Registrar</button>
     </div>
   );
 }

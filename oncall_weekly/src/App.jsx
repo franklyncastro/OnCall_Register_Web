@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
+import Home from "./components/Home/Home";
 import "./style/App.css";
-import SeleccionCard from "./components/SeleccionCard/SeleccionCard";
-import ResultadosCard from "./components/ResultadosCard/ResultadosCard";
+import {Route, Routes} from 'react-router-dom'
+import SeleccionCard from './components/SeleccionCard/SeleccionCard.jsx'
+import ResultadosCard from "./components/ResultadosCard/ResultadosCard.jsx";
+import Nav from "./components/Nav/Nav";
+import Error from "./components/Error/Error.jsx";
 
 function App() {
-  // Inicializamos leyendo directamente del localStorage (mejor rendimiento)
+ 
+    // Inicializamos leyendo directamente del localStorage (mejor rendimiento)
   const [asignaciones, setAsignaciones] = useState(() => {
     const dataGuardada = localStorage.getItem("asignaciones");
     return dataGuardada ? JSON.parse(dataGuardada) : [];
@@ -16,15 +21,24 @@ function App() {
   }, [asignaciones]);
 
   return (
-    <div className="main-container">
-      <SeleccionCard
+    <div >
+       <Nav/>
+     <div className="main-container">
+
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/selection" element={<SeleccionCard
         asignaciones={asignaciones}
         setAsignaciones={setAsignaciones}
-      />
-      <ResultadosCard
+        />}/>
+        <Route path="/results" element={<ResultadosCard
         asignaciones={asignaciones}
         setAsignaciones={setAsignaciones}
-      />
+        />}/>
+        <Route path="/*" element={<Error/>}/>
+      </Routes>
+     </div>
+      
     </div>
   );
 }
