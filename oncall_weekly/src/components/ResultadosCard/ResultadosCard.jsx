@@ -3,14 +3,15 @@ import Swal from "sweetalert2";
 
 function ResultadosCard({ asignaciones, setAsignaciones }) {
 
-  // 👉 Función para formatear fechas
   const formatearFecha = (fechaISO) => {
-    const fecha = new Date(fechaISO);
-    const opciones = { day: "numeric", month: "long" };
-    let texto = fecha.toLocaleDateString("es-ES", opciones);
+  // Forzar que la fecha sea interpretada en horario local
+  const fecha = new Date(fechaISO + "T00:00:00");
 
-    // Capitalizar primera letra
-    return texto.charAt(0).toUpperCase() + texto.slice(1);
+  const opciones = { day: "numeric", month: "long" };
+  let texto = fecha.toLocaleDateString("es-ES", opciones);
+
+  // Capitalizar la primera letra del mes
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
   };
 
   // 👉 Eliminar semana con SweetAlert2
