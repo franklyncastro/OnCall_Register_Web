@@ -6,6 +6,7 @@ import SeleccionCard from './components/SeleccionCard/SeleccionCard.jsx'
 import ResultadosCard from "./components/ResultadosCard/ResultadosCard.jsx";
 import Nav from "./components/Nav/Nav";
 import Error from "./components/Error/Error.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 
 function App() {
  
@@ -21,7 +22,7 @@ function App() {
   }, [asignaciones]);
 
   return (
-    <div >
+    <div className="app-layout">
        <Nav/>
      <div className="main-container">
 
@@ -38,7 +39,7 @@ function App() {
         <Route path="/*" element={<Error/>}/>
       </Routes>
      </div>
-      
+      <Footer/>
     </div>
   );
 }

@@ -19,4 +19,15 @@ body {
   justify-content: center;
   align-items: center;
   /* height: 100%; */
+  flex: 1;
 }
+
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* .app-content {
+  flex: 1;
+} */
