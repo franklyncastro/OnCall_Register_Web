@@ -13,6 +13,7 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
 
   const manejarGuardar = () => {
 
+    // Validación: campos vacíos
     if (!switchPerson || !corePerson || !fechaInicio || !fechaFin) {
       Swal.fire({
         icon: "error",
@@ -22,6 +23,35 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
       return;
     }
 
+    // Validación: fecha final debe ser mayor o igual a fecha inicial
+    if (new Date(fechaFin) < new Date(fechaInicio)) {
+      Swal.fire({
+        icon: "error",
+        title: "Fecha incorrecta",
+        text: "La fecha final no puede ser menor que la fecha inicial.",
+      });
+      return;
+    }
+
+    // Validación: evitar registros duplicados exactos
+    const existe = asignaciones.some(
+      (a) =>
+        a.inicio === fechaInicio &&
+        a.fin === fechaFin &&
+        a.switch === switchPerson &&
+        a.core === corePerson
+    );
+
+    if (existe) {
+      Swal.fire({
+        icon: "warning",
+        title: "Registro duplicado",
+        text: "Esta asignación ya existe.",
+      });
+      return;
+    }
+
+    // Crear nueva semana
     const nuevaSemana = {
       id: Date.now(),
       inicio: fechaInicio,
@@ -30,7 +60,12 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
       core: corePerson,
     };
 
-    setAsignaciones([...asignaciones, nuevaSemana]);
+    // Ordenar por fecha de inicio ANTES de guardar
+    const nuevasOrdenadas = [...asignaciones, nuevaSemana].sort(
+      (a, b) => new Date(a.inicio) - new Date(b.inicio)
+    );
+
+    setAsignaciones(nuevasOrdenadas);
 
     // ALERTA DE REGISTRO EXITOSO
     Swal.fire({
