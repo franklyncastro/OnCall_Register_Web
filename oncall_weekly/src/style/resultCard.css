@@ -5,7 +5,7 @@
 }
 
 /* Título */
-/* From Uiverse.io by WhiteNervosa */ 
+
 .title h2 {
   font-size: 28px;
   color: rgb(16, 137, 211);
@@ -16,35 +16,8 @@
   border: none;
   background: none;
   text-transform: uppercase;
-  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-  transition-duration: 900ms;
-  transition-property: color;
 }
 
-.title h2:focus,
-.title h2:hover {
-  color: rgba(16, 136, 211, 0.774);
-}
-
-.title h2:focus:after,
-.title h2:hover:after {
-  width: 100%;
-  left: 0%;
-}
-
-.title h2:after {
-  content: "";
-  pointer-events: none;
-  bottom: -2px;
-  left: 50%;
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background-color: #fff;
-  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-  transition-duration: 400ms;
-  transition-property: width, left;
-}
 
 /* Contenedor de todas las cards */
 .container_card {
@@ -120,11 +93,7 @@
   background: #e63939;
 }
 
-.svgIcon {
-  width: 18px;
-  height: 18px;
-  fill: white;
-}
+
 
 /* Texto vacío */
 .vacio {
@@ -146,59 +115,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
   cursor: pointer;
   transition-duration: .3s;
   overflow: hidden;
   position: relative;
- 
 }
 
-.svgIcon {
-  width: 12px;
-  transition-duration: .3s;
-}
-
-.svgIcon path {
-  fill: white;
-}
-
-.button:hover {
-  width: 90px;
-  border-radius: 50px;
-  /* transition-duration: .3s; */
-  background-color: hsl(2, 83%, 41%);
-  align-items: center;
-
-}
-
-.button:hover .svgIcon {
-  width: 50px;
-  /* transition-duration: .3s; */
-  transform: translateY(60%);
-}
-
-.button:hover {
-  background-color: hsl(2, 83%, 41%);
-  color: hsl(0, 0%, 100%);
-  box-shadow: rgb(255, 69, 69) 0px 7px 29px 0px;
-}
-
-.button::before {
-  position: absolute;
-  top: -20px;
-  content: "Delete";
-  color: white;
-  transition-duration: .3s;
-  font-size: 2px;
-}
-
-.button:hover::before {
-  font-size: 13px;
-  opacity: 1;
-  transform: translateY(30px);
-  /* transition-duration: .3s; */
-}
 
 .button:active {
   letter-spacing: 3px;
@@ -238,3 +160,158 @@
   width: 291px;
   font-size: 25px;
 }
+
+
+Wrapper para scroll en mobile
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+/* Tabla principal */
+.shuffle-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #f7f7f7;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: rgba(133, 189, 215, 0.8) 0px 20px 30px -25px;
+}
+
+/* Header */
+.shuffle-table thead {
+  background: rgb(16, 137, 211);
+}
+
+.shuffle-table th {
+  padding: 14px;
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* Filas */
+.shuffle-table td {
+  padding: 14px;
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Hover fila */
+.shuffle-table tbody tr:hover {
+  background: rgba(16, 137, 211, 0.08);
+}
+
+/* Última fila sin borde */
+.shuffle-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.fa-regular{
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+
+  .shuffle-table,
+  .shuffle-table thead,
+  .shuffle-table tbody,
+  .shuffle-table th,
+  .shuffle-table td,
+  .shuffle-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .shuffle-table{
+    background-color: transparent;
+  }
+  /* Ocultar header */
+  .shuffle-table thead {
+    display: none;
+  }
+
+  /* Card */
+
+  .resultados-card{
+    width: 80%;
+    padding: 20px;
+  }
+  
+  .shuffle-table tbody tr {
+    background: #ffffff; /* Fondo blanco puro */
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 16px 20px; /* Padding para separar contenido de bordes */
+    border-radius: 14px;
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    box-sizing: border-box;
+    position: relative;
+    
+  }
+
+  /* Cada fila interna */
+  .shuffle-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border: none;
+    font-size: 1rem;
+  }
+
+  /* Label */
+  .shuffle-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: rgb(16, 137, 211);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-left: 8px;
+  }
+
+ 
+
+.shuffle-table td[data-label="Acción"] {
+  display: flex;
+  flex-direction: column;       
+  align-items: center;         
+  gap: 8px;                    
+  margin-top: 10px;
+  padding: 10px 0;
+  text-align: center;           
+}
+
+.shuffle-table td[data-label="Acción"]::before {
+  content: "ACCIÓN";           
+  font-weight: 700;
+  color: rgb(16, 137, 211);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.shuffle-table .button {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgb(16, 137, 211);
+  color: white;
+  box-shadow: 0 2px 6px rgba(245, 140, 140, 0.12);
+  transition: background-color 0.3s ease;
+  align-self: center;           
+}
+
+.shuffle-table .button:hover {
+  background-color: rgb(12, 100, 155);
+}
+
+}
+
+
+
