@@ -2,17 +2,13 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import "../../style/selectionCard.css";
 
-function SeleccionCard({ asignaciones, setAsignaciones }) {
-  const nombresSwitch = ["Franklyn Castro", "Jose Suarez"];
-  const nombresCore = ["Luis Feliz", "Rafael Fabian", "Anglis Mercedes"];
-
+function SeleccionCard({ asignaciones, agregarAsignacion, nombresSwitch, nombresCore }) {
   const [switchPerson, setSwitchPerson] = useState("");
   const [corePerson, setCorePerson] = useState("");
   const [fechaInicio, setFechaInicio] = useState("");
   const [fechaFin, setFechaFin] = useState("");
 
-  const manejarGuardar = () => {
-
+  const manejarGuardar = async () => {
     // Validación: campos vacíos
     if (!switchPerson || !corePerson || !fechaInicio || !fechaFin) {
       Swal.fire({
@@ -23,7 +19,7 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
       return;
     }
 
-    // Validación: fecha final debe ser mayor o igual a fecha inicial
+    // Validación: fecha final >= fecha inicial
     if (new Date(fechaFin) < new Date(fechaInicio)) {
       Swal.fire({
         icon: "error",
@@ -33,7 +29,7 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
       return;
     }
 
-    // Validación: evitar registros duplicados exactos
+    // Validación: evitar duplicados exactos
     const existe = asignaciones.some(
       (a) =>
         a.inicio === fechaInicio &&
@@ -53,19 +49,15 @@ function SeleccionCard({ asignaciones, setAsignaciones }) {
 
     // Crear nueva semana
     const nuevaSemana = {
-      id: Date.now(),
       inicio: fechaInicio,
       fin: fechaFin,
       switch: switchPerson,
       core: corePerson,
+      creado: new Date().toISOString(),
     };
 
-    // Ordenar por fecha de inicio ANTES de guardar
-    const nuevasOrdenadas = [...asignaciones, nuevaSemana].sort(
-      (a, b) => new Date(a.inicio) - new Date(b.inicio)
-    );
-
-    setAsignaciones(nuevasOrdenadas);
+    // Guardar en Firestore usando la función pasada desde App.jsx
+    await agregarAsignacion(nuevaSemana);
 
     // ALERTA DE REGISTRO EXITOSO
     Swal.fire({

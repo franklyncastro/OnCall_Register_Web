@@ -21,10 +21,14 @@
 
 /* Botón eliminar */
 .button {
-  cursor: pointer;
-  color: white;
-  transition: background .2s ease;
-  background: #f8f7f7;
+ cursor: pointer;
+ color: white;
+ transition: background .2s ease;
+ background: #f8f7f7;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border-radius: 50%;
 }
 
 .button:hover {
@@ -223,3 +227,29 @@ Wrapper para scroll en mobile
 }
 
 
+.containerUsers{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.buttonUseredit{
+  transition: 0.9;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.buttonUseredit:hover{
+  background-color: green;
+}
+
+.buttonUserdelete{
+  transition: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buttonUserdelete:hover{
+  background-color: #f81b06;
+}
