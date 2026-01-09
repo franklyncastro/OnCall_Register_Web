@@ -7,19 +7,19 @@ export default function Nav() {
         <nav>
             <ul>
                 <li>
-                    <Link to='/'><i class="fa-solid fa-house"></i> <span>Inicio</span></Link>
+                    <Link to='/'><i className="fa-solid fa-house"></i> <span>Inicio</span></Link>
                 </li>
                 <li>
-                    <Link to='/add'><i class="fas fa-user-plus"></i> <span>Registrar Usuarios</span></Link>
+                    <Link to='/add'><i className="fas fa-user-plus"></i> <span>Registrar Usuarios</span></Link>
                 </li>
                 <li>
-                    <Link to='/users'><i class="fas fa-user-plus"></i> <span>Usuarios</span></Link>
+                    <Link to='/users'><i className="fas fa-user-plus"></i> <span>Usuarios</span></Link>
                 </li>
                 <li>
-                    <Link to='/selection'><i class="fa-solid fa-plus"></i><span>Agregar OnCall</span></Link>
+                    <Link to='/selection'><i className="fa-solid fa-plus"></i><span>Agregar OnCall</span></Link>
                 </li>
                 <li>
-                    <Link to='/results'><i class="fa-notdog-duo fa-solid fa-chart-pie"></i> <span>Ver OnCall</span></Link>
+                    <Link to='/results'><i className="fa-notdog-duo fa-solid fa-chart-pie"></i> <span>Ver OnCall</span></Link>
                 </li>
             </ul>
         </nav>

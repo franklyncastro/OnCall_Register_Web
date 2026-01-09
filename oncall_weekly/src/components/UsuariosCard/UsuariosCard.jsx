@@ -9,21 +9,27 @@ import {
 import { db } from "../../firebase/config";
 import Swal from "sweetalert2";
 import "../../style/resultCard.css";
+import Loading from "../Loading/Loading";
 
-function UsuariosCard() {
+function UsuariosCard({ refrescarNombres }) {
   const [usuarios, setUsuarios] = useState([]);
   const [editandoId, setEditandoId] = useState(null);
   const [nuevoNombre, setNuevoNombre] = useState("");
   const [nuevoTipo, setNuevoTipo] = useState("");
+  const [loading, setLoading] = useState(true)
 
   // 🔹 Obtener usuarios desde Firestore
   const obtenerUsuarios = async () => {
+    //Cargamos el loading mientras se obtienen los usuarios
+    setLoading(true);
+
     const querySnapshot = await getDocs(collection(db, "departamentos"));
     const data = querySnapshot.docs.map((docItem) => ({
       id: docItem.id,
       ...docItem.data(),
     }));
     setUsuarios(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -52,8 +58,11 @@ function UsuariosCard() {
           timer: 1500,
           showConfirmButton: false,
         });
+        await refrescarNombres();
       }
     });
+
+    
   };
 
   // 🔹 Iniciar edición
@@ -92,6 +101,8 @@ function UsuariosCard() {
       showConfirmButton: false,
     });
   };
+
+  if (loading) return <Loading />;
 
   return (
     <div className="resultados-card">

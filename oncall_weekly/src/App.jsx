@@ -85,7 +85,7 @@ function App() {
             path="/add"
             element={<RegisterUser actualizarNombres={actualizarNombres} />}
           />
-          <Route path="/users" element={<UsuariosCard />} />
+          <Route path="/users" element={<UsuariosCard refrescarNombres={obtenerNombres}/>} />
 
           <Route
             path="/results"

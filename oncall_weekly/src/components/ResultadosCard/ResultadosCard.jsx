@@ -1,5 +1,9 @@
 import "../../style/resultCard.css";
 import Swal from "sweetalert2";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase/config";
+import Loading from "../Loading/Loading";
+import { useEffect, useState } from "react";
 
 function ResultadosCard({ asignaciones, setAsignaciones }) {
   const formatearFecha = (fechaISO) => {
@@ -8,8 +12,15 @@ function ResultadosCard({ asignaciones, setAsignaciones }) {
     const texto = fecha.toLocaleDateString("es-ES", opciones);
     return texto.charAt(0).toUpperCase() + texto.slice(1);
   };
+  const [loading, setLoading] = useState(true);
 
-  const eliminarSemana = (id) => {
+  useEffect(() => {
+    if (asignaciones) {
+      setLoading(false);
+    }
+  }, [asignaciones]);
+
+  const eliminarSemana = async (id) => {
     Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción eliminará el registro permanentemente.",
@@ -19,10 +30,11 @@ function ResultadosCard({ asignaciones, setAsignaciones }) {
       cancelButtonColor: "#3085d6",
       confirmButtonText: "Sí, eliminar",
       cancelButtonText: "Cancelar",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        const nuevas = asignaciones.filter((a) => a.id !== id);
-        setAsignaciones(nuevas);
+        await deleteDoc(doc(db, "asignaciones", id));
+
+        setAsignaciones(asignaciones.filter((a) => a.id !== id));
 
         Swal.fire({
           icon: "success",
@@ -34,6 +46,7 @@ function ResultadosCard({ asignaciones, setAsignaciones }) {
       }
     });
   };
+  if (loading) return <Loading />;
 
   return (
     <div className="resultados-card">
