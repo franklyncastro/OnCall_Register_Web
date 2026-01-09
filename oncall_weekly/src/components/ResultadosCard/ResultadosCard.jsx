@@ -1,17 +1,11 @@
-import "../../style/resultCard.css";
+import { useEffect, useState } from "react";
+import { Table, Button, Spinner } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import Loading from "../Loading/Loading";
-import { useEffect, useState } from "react";
+import styles from "./ResultadosCard.module.css";
 
 function ResultadosCard({ asignaciones, setAsignaciones }) {
-  const formatearFecha = (fechaISO) => {
-    const fecha = new Date(fechaISO + "T00:00:00");
-    const opciones = { day: "numeric", month: "long" };
-    const texto = fecha.toLocaleDateString("es-ES", opciones);
-    return texto.charAt(0).toUpperCase() + texto.slice(1);
-  };
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,78 +14,83 @@ function ResultadosCard({ asignaciones, setAsignaciones }) {
     }
   }, [asignaciones]);
 
-  const eliminarSemana = async (id) => {
+  const formatearFecha = (fechaISO) => {
+    const fecha = new Date(fechaISO + "T00:00:00");
+    return fecha.toLocaleDateString("es-ES", {
+      day: "numeric",
+      month: "long",
+    });
+  };
+
+  const eliminarSemana = (id) => {
     Swal.fire({
-      title: "¿Estás seguro?",
-      text: "Esta acción eliminará el registro permanentemente.",
+      title: "¿Eliminar semana?",
+      text: "Esta acción no se puede deshacer.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sí, eliminar",
+      confirmButtonText: "Eliminar",
       cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
         await deleteDoc(doc(db, "asignaciones", id));
 
-        setAsignaciones(asignaciones.filter((a) => a.id !== id));
+        setAsignaciones((prev) => prev.filter((a) => a.id !== id));
 
         Swal.fire({
           icon: "success",
           title: "Eliminado",
-          text: "La semana fue eliminada correctamente.",
-          timer: 1800,
+          timer: 1200,
           showConfirmButton: false,
         });
       }
     });
   };
-  if (loading) return <Loading />;
+
+  if (loading) {
+    return (
+      <div className={styles.loading}>
+        <Spinner animation="border" />
+      </div>
+    );
+  }
 
   return (
-    <div className="resultados-card">
-      <div className="title">
-        <h2>
-          <i className="fa-solid fa-laptop"></i> On-Call
-        </h2>
-      </div>
+    <div className={styles.container}>
+      <h2 className={styles.title}>OnCall Registrados</h2>
 
       {asignaciones.length === 0 ? (
-        <p className="vacio">No hay registros aún.</p>
+        <p className={styles.empty}>No hay registros aún.</p>
       ) : (
-        <div className="table-wrapper">
-          <table className="shuffle-table">
-            <thead>
-              <tr>
-                <th>Switch</th>
-                <th>Core</th>
-                <th>Desde</th>
-                <th>Hasta</th>
-                <th>Eliminar</th>
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>Switch</th>
+              <th>Core</th>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            {asignaciones.map((s) => (
+              <tr key={s.id}>
+                <td>{s.switch}</td>
+                <td>{s.core}</td>
+                <td>{formatearFecha(s.inicio)}</td>
+                <td>{formatearFecha(s.fin)}</td>
+                <td>
+                  <Button
+                    size="sm"
+                    variant="outline-danger"
+                    onClick={() => eliminarSemana(s.id)}
+                  >
+                    Eliminar
+                  </Button>
+                </td>
               </tr>
-            </thead>
-
-            <tbody>
-              {asignaciones.map((semana) => (
-                <tr key={semana.id}>
-                  <td data-label="Switch">{semana.switch}</td>
-                  <td data-label="Core">{semana.core}</td>
-                  <td data-label="Desde">{formatearFecha(semana.inicio)}</td>
-                  <td data-label="Hasta">{formatearFecha(semana.fin)}</td>
-                  <td data-label="Acción">
-                    <button
-                      className="button"
-                      onClick={() => eliminarSemana(semana.id)}
-                      aria-label="Eliminar semana"
-                    >
-                      <i className="fa-regular fa-trash-can"></i>
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </Table>
       )}
     </div>
   );

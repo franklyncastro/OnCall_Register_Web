@@ -1,0 +1,32 @@
+.container {
+  padding: 1.5rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.empty {
+  text-align: center;
+  color: #666;
+  margin-top: 2rem;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+
+.card {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.table {
+  color: var(--text-color);
+}

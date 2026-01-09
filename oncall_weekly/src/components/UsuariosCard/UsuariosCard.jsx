@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Table, Button, Spinner, Form, Stack } from "react-bootstrap";
 import {
   collection,
   getDocs,
@@ -8,25 +9,21 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import Swal from "sweetalert2";
-import "../../style/resultCard.css";
-import Loading from "../Loading/Loading";
+import styles from "./UsuariosCard.module.css";
 
 function UsuariosCard({ refrescarNombres }) {
   const [usuarios, setUsuarios] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [editandoId, setEditandoId] = useState(null);
   const [nuevoNombre, setNuevoNombre] = useState("");
   const [nuevoTipo, setNuevoTipo] = useState("");
-  const [loading, setLoading] = useState(true)
 
-  // 🔹 Obtener usuarios desde Firestore
   const obtenerUsuarios = async () => {
-    //Cargamos el loading mientras se obtienen los usuarios
     setLoading(true);
-
     const querySnapshot = await getDocs(collection(db, "departamentos"));
-    const data = querySnapshot.docs.map((docItem) => ({
-      id: docItem.id,
-      ...docItem.data(),
+    const data = querySnapshot.docs.map((d) => ({
+      id: d.id,
+      ...d.data(),
     }));
     setUsuarios(data);
     setLoading(false);
@@ -36,157 +33,134 @@ function UsuariosCard({ refrescarNombres }) {
     obtenerUsuarios();
   }, []);
 
-  // 🔹 Eliminar usuario
   const eliminarUsuario = (id) => {
     Swal.fire({
-      title: "¿Estás seguro?",
-      text: "Esta acción eliminará al usuario permanentemente.",
+      title: "¿Eliminar usuario?",
+      text: "Esta acción no se puede deshacer.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sí, eliminar",
-      cancelButtonText: "Cancelar",
+      confirmButtonText: "Eliminar",
     }).then(async (result) => {
       if (result.isConfirmed) {
         await deleteDoc(doc(db, "departamentos", id));
-        setUsuarios(usuarios.filter((u) => u.id !== id));
-        Swal.fire({
-          icon: "success",
-          title: "Eliminado",
-          text: "El usuario fue eliminado correctamente.",
-          timer: 1500,
-          showConfirmButton: false,
-        });
-        await refrescarNombres();
+        setUsuarios((prev) => prev.filter((u) => u.id !== id));
+        refrescarNombres?.();
+        Swal.fire("Eliminado", "", "success");
       }
     });
-
-    
   };
 
-  // 🔹 Iniciar edición
-  const editarUsuario = (usuario) => {
-    setEditandoId(usuario.id);
-    setNuevoNombre(usuario.nombre);
-    setNuevoTipo(usuario.tipo);
+  const editarUsuario = (u) => {
+    setEditandoId(u.id);
+    setNuevoNombre(u.nombre);
+    setNuevoTipo(u.tipo);
   };
 
-  // 🔹 Guardar cambios de edición
   const guardarEdicion = async (id) => {
-    if (!nuevoNombre || !nuevoTipo) {
-      Swal.fire({
-        icon: "error",
-        title: "Campos vacíos",
-        text: "Completa el nombre y el departamento.",
-      });
-      return;
-    }
+    if (!nuevoNombre || !nuevoTipo) return;
 
-    const usuarioRef = doc(db, "departamentos", id);
-    await updateDoc(usuarioRef, { nombre: nuevoNombre, tipo: nuevoTipo });
+    await updateDoc(doc(db, "departamentos", id), {
+      nombre: nuevoNombre,
+      tipo: nuevoTipo,
+    });
 
-    setUsuarios(
-      usuarios.map((u) =>
+    setUsuarios((prev) =>
+      prev.map((u) =>
         u.id === id ? { ...u, nombre: nuevoNombre, tipo: nuevoTipo } : u
       )
     );
-    setEditandoId(null);
 
-    Swal.fire({
-      icon: "success",
-      title: "Actualizado",
-      text: "El usuario se actualizó correctamente.",
-      timer: 1500,
-      showConfirmButton: false,
-    });
+    setEditandoId(null);
+    refrescarNombres?.();
   };
 
-  if (loading) return <Loading />;
+  if (loading) {
+    return (
+      <div className={styles.loading}>
+        <Spinner animation="border" />
+      </div>
+    );
+  }
 
   return (
-    <div className="resultados-card">
-      <div className="title">
-        <h2>
-          <i className="fa-solid fa-users"></i> Usuarios
-        </h2>
-      </div>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Usuarios Registrados</h2>
 
-      {usuarios.length === 0 ? (
-        <p className="vacio">No hay usuarios registrados.</p>
-      ) : (
-        <div className="table-wrapper">
-          <table className="shuffle-table">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Departamento</th>
-                <th>Acción</th>
-              </tr>
-            </thead>
-            <tbody>
-              {usuarios.map((u) => (
-                <tr key={u.id}>
-                  <td data-label="Nombre">
-                    {editandoId === u.id ? (
-                      <input
-                        type="text"
-                        value={nuevoNombre}
-                        onChange={(e) => setNuevoNombre(e.target.value)}
-                      />
-                    ) : (
-                      u.nombre
-                    )}
-                  </td>
-                  <td data-label="Departamento">
-                    {editandoId === u.id ? (
-                      <select
-                        value={nuevoTipo}
-                        onChange={(e) => setNuevoTipo(e.target.value)}
-                      >
-                        <option value="">Selecciona</option>
-                        <option value="switch">Switch</option>
-                        <option value="core">Core</option>
-                      </select>
-                    ) : (
-                      u.tipo
-                    )}
-                  </td>
-                  <td data-label="Acción">
-                    {editandoId === u.id ? (
-                      <button
-                        className="button"
-                        onClick={() => guardarEdicion(u.id)}
-                      >
-                        💾
-                      </button>
-                    ) : (
-                      <div className="containerUsers">
-                        <div>
-                          <button
-                            className="button buttonUseredit"
-                            onClick={() => editarUsuario(u)}
-                          >
-                            <i class="fas fa-edit"></i>
-                          </button>
-                        </div>
-                        <div>
-                          <button
-                            className="button buttonUserdelete"
-                            onClick={() => eliminarUsuario(u.id)}
-                          >
-                            <i className="fa-regular fa-trash-can"></i>
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      <Table striped bordered hover responsive>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Departamento</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {usuarios.map((u) => (
+            <tr key={u.id}>
+              <td>
+                {editandoId === u.id ? (
+                  <Form.Control
+                    value={nuevoNombre}
+                    onChange={(e) => setNuevoNombre(e.target.value)}
+                  />
+                ) : (
+                  u.nombre
+                )}
+              </td>
+
+              <td>
+                {editandoId === u.id ? (
+                  <Form.Select
+                    value={nuevoTipo}
+                    onChange={(e) => setNuevoTipo(e.target.value)}
+                  >
+                    <option value="">Selecciona</option>
+                    <option value="switch">Switch</option>
+                    <option value="core">Core</option>
+                  </Form.Select>
+                ) : (
+                  u.tipo
+                )}
+              </td>
+
+              <td>
+                {editandoId === u.id ? (
+                  <Stack direction="horizontal" gap={2}>
+                    <Button size="sm" onClick={() => guardarEdicion(u.id)}>
+                      Guardar
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => setEditandoId(null)}
+                    >
+                      Cancelar
+                    </Button>
+                  </Stack>
+                ) : (
+                  <Stack direction="horizontal" gap={2}>
+                    <Button
+                      size="sm"
+                      variant="outline-primary"
+                      onClick={() => editarUsuario(u)}
+                    >
+                      Editar
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline-danger"
+                      onClick={() => eliminarUsuario(u.id)}
+                    >
+                      Eliminar
+                    </Button>
+                  </Stack>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 }

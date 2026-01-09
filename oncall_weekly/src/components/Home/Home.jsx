@@ -1,4 +1,4 @@
-import '../../../src/style/Home.css'
+import './Home.module.css'
 import TextType from '../TypeText/Typetext'
 
 

@@ -1,35 +1,35 @@
 import { useState } from "react";
+import { Form, Button, Card, Row, Col } from "react-bootstrap";
 import Swal from "sweetalert2";
-import "../../style/selectionCard.css";
+import styles from './SeleccionCard.module.css'
 
-function SeleccionCard({ asignaciones, agregarAsignacion, nombresSwitch, nombresCore }) {
+function SeleccionCard({
+  asignaciones,
+  agregarAsignacion,
+  nombresSwitch,
+  nombresCore,
+}) {
   const [switchPerson, setSwitchPerson] = useState("");
   const [corePerson, setCorePerson] = useState("");
   const [fechaInicio, setFechaInicio] = useState("");
   const [fechaFin, setFechaFin] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const manejarGuardar = async () => {
-    // Validación: campos vacíos
     if (!switchPerson || !corePerson || !fechaInicio || !fechaFin) {
-      Swal.fire({
-        icon: "error",
-        title: "Campos incompletos",
-        text: "Completa todos los campos antes de guardar.",
-      });
+      Swal.fire("Campos incompletos", "Completa todos los campos", "error");
       return;
     }
 
-    // Validación: fecha final >= fecha inicial
     if (new Date(fechaFin) < new Date(fechaInicio)) {
-      Swal.fire({
-        icon: "error",
-        title: "Fecha incorrecta",
-        text: "La fecha final no puede ser menor que la fecha inicial.",
-      });
+      Swal.fire(
+        "Fecha incorrecta",
+        "La fecha final no puede ser menor",
+        "error"
+      );
       return;
     }
 
-    // Validación: evitar duplicados exactos
     const existe = asignaciones.some(
       (a) =>
         a.inicio === fechaInicio &&
@@ -39,15 +39,10 @@ function SeleccionCard({ asignaciones, agregarAsignacion, nombresSwitch, nombres
     );
 
     if (existe) {
-      Swal.fire({
-        icon: "warning",
-        title: "Registro duplicado",
-        text: "Esta asignación ya existe.",
-      });
+      Swal.fire("Duplicado", "Esta asignación ya existe", "warning");
       return;
     }
 
-    // Crear nueva semana
     const nuevaSemana = {
       inicio: fechaInicio,
       fin: fechaFin,
@@ -56,76 +51,105 @@ function SeleccionCard({ asignaciones, agregarAsignacion, nombresSwitch, nombres
       creado: new Date().toISOString(),
     };
 
-    // Guardar en Firestore usando la función pasada desde App.jsx
-    await agregarAsignacion(nuevaSemana);
+    try {
+      setLoading(true);
+      await agregarAsignacion(nuevaSemana);
 
-    // ALERTA DE REGISTRO EXITOSO
-    Swal.fire({
-      icon: "success",
-      title: "Registro exitoso",
-      text: "La asignación ha sido registrada correctamente.",
-      timer: 2000,
-      showConfirmButton: false,
-    });
+      Swal.fire({
+        icon: "success",
+        title: "OnCall registrado",
+        timer: 1500,
+        showConfirmButton: false,
+      });
 
-    // Limpiar campos
-    setSwitchPerson("");
-    setCorePerson("");
-    setFechaInicio("");
-    setFechaFin("");
+      setSwitchPerson("");
+      setCorePerson("");
+      setFechaInicio("");
+      setFechaFin("");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="seleccion-card">
-      <h1><i className="fa-etch fa-solid fa-laptop"></i> On-Call App</h1>
+    <div className={styles.container}>
+      <Card className={styles.card}>
+        <Card.Body>
+          <Card.Title className={styles.title}>
+            Agregar OnCall
+          </Card.Title>
 
-      <div className="form-section">
-        <h2>Switch</h2>
-        <select
-          value={switchPerson}
-          onChange={(e) => setSwitchPerson(e.target.value)}
-        >
-          <option value="">Selecciona un nombre</option>
-          {nombresSwitch.map((n, i) => (
-            <option key={i} value={n}>
-              {n}
-            </option>
-          ))}
-        </select>
-      </div>
+          <Form>
+            <Row className="mb-3">
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label>Switch</Form.Label>
+                  <Form.Select
+                    value={switchPerson}
+                    onChange={(e) => setSwitchPerson(e.target.value)}
+                  >
+                    <option value="">Selecciona</option>
+                    {nombresSwitch.map((n, i) => (
+                      <option key={i} value={n}>
+                        {n}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              </Col>
 
-      <div className="form-section">
-        <h2>Core</h2>
-        <select
-          value={corePerson}
-          onChange={(e) => setCorePerson(e.target.value)}
-        >
-          <option value="">Selecciona un nombre</option>
-          {nombresCore.map((n, i) => (
-            <option key={i} value={n}>
-              {n}
-            </option>
-          ))}
-        </select>
-      </div>
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label>Core</Form.Label>
+                  <Form.Select
+                    value={corePerson}
+                    onChange={(e) => setCorePerson(e.target.value)}
+                  >
+                    <option value="">Selecciona</option>
+                    {nombresCore.map((n, i) => (
+                      <option key={i} value={n}>
+                        {n}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+            </Row>
 
-      <div className="date-section">
-        <label>Inicio:</label>
-        <input
-          type="date"
-          value={fechaInicio}
-          onChange={(e) => setFechaInicio(e.target.value)}
-        />
+            <Row className="mb-3">
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label>Fecha inicio</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={fechaInicio}
+                    onChange={(e) => setFechaInicio(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
 
-        <label>Fin:</label>
-        <input
-          type="date"
-          value={fechaFin}
-          onChange={(e) => setFechaFin(e.target.value)}
-        />
-      </div>
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label>Fecha fin</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={fechaFin}
+                    onChange={(e) => setFechaFin(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
-      <button className="btn1" onClick={manejarGuardar}>Registrar</button>
+            <Button
+              className="w-100"
+              onClick={manejarGuardar}
+              disabled={loading}
+            >
+              {loading ? "Guardando..." : "Registrar OnCall"}
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </div>
   );
 }

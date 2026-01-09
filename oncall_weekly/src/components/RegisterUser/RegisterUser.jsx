@@ -1,77 +1,91 @@
 import { useState } from "react";
+import { Form, Button, Card } from "react-bootstrap";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import Swal from "sweetalert2";
-import '../../style/RegisterUser.css'
+import styles from "./RegisterUser.module.css";
 
 function RegisterUser({ actualizarNombres }) {
   const [nombre, setNombre] = useState("");
   const [tipo, setTipo] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const manejarGuardar = async () => {
     if (!nombre || !tipo) {
-      Swal.fire({
-        icon: "error",
-        title: "Campos incompletos",
-        text: "Selecciona un departamento y escribe un nombre.",
-      });
+      Swal.fire("Campos incompletos", "Completa todos los campos", "error");
       return;
     }
 
     try {
-      // Guardar en Firestore
+      setLoading(true);
+
       await addDoc(collection(db, "departamentos"), {
         nombre,
         tipo,
       });
 
-      // Obtener todos los nombres nuevamente para actualizar selects
       const querySnapshot = await getDocs(collection(db, "departamentos"));
-      const data = querySnapshot.docs.map(doc => doc.data());
-
-      // Actualizar estados en App.jsx
+      const data = querySnapshot.docs.map((doc) => doc.data());
       actualizarNombres(data);
 
       Swal.fire({
         icon: "success",
-        title: "Empleado agregado",
-        text: "Se ha agregado correctamente a la base de datos.",
+        title: "Usuario agregado",
         timer: 1500,
         showConfirmButton: false,
       });
 
-      // Limpiar campos
       setNombre("");
       setTipo("");
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      console.error("Error agregando empleado:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "No se pudo agregar el empleado.",
-      });
+      Swal.fire("Error", "No se pudo agregar el usuario", "error");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="departamento-form">
-      <h2 className="titleH2">Agregar Empleado</h2>
+    <div className={styles.container}>
+      <Card className={styles.card}>
+        <Card.Body>
+          <Card.Title className={styles.title}>
+            Agregar Usuario
+          </Card.Title>
 
-      <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
-        <option value="" className="inputUser">Selecciona departamento</option>
-        <option value="switch">Switch</option>
-        <option value="core">Core</option>
-      </select>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Departamento</Form.Label>
+              <Form.Select
+                value={tipo}
+                onChange={(e) => setTipo(e.target.value)}
+              >
+                <option value="">Selecciona</option>
+                <option value="switch">Switch</option>
+                <option value="core">Core</option>
+              </Form.Select>
+            </Form.Group>
 
-      <input
-        type="text"
-        placeholder="Nombre del empleado"
-        value={nombre}
-        onChange={(e) => setNombre(e.target.value)}
-        className="inputUser"
-      />
+            <Form.Group className="mb-3">
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Nombre del usuario"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+              />
+            </Form.Group>
 
-      <button onClick={manejarGuardar}>GUARDAR</button>
+            <Button
+              className="w-100"
+              onClick={manejarGuardar}
+              disabled={loading}
+            >
+              {loading ? "Guardando..." : "Guardar Usuario"}
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </div>
   );
 }
