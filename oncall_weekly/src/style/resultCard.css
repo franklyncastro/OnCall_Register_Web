@@ -1,7 +1,6 @@
 /* Contenedor general */
 .resultados-card {
   width: 90%;
-  margin: 20px auto;
 }
 
 /* Título */
@@ -19,78 +18,17 @@
 }
 
 
-/* Contenedor de todas las cards */
-.container_card {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;   /* Permite salto a nueva fila si no caben */
-  gap: 20px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-/* Cada card individual */
-.semana-item {
-  background: #f7f7f7;
-  padding: 18px 22px;
-  border-radius: 12px;
-  width: 280px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-
-  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 30px -25px;
-  transition: transform .2s ease, box-shadow .2s ease;
-  
-}
-
-/* Hover suave */
-.semana-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-  
-}
-
-/* Fecha */
-.fechas {
-  font-size: 1.1rem;
-  color: rgb(16, 137, 211);
-  font-weight: 600;
-}
-
-/* Departamento */
-.departamentos {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.dep {
-  font-size: 1rem;
-  color: rgb(228, 243, 252);
-}
 
 /* Botón eliminar */
 .button {
-  background: #ff4d4d;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-
   cursor: pointer;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   transition: background .2s ease;
+  background: #f8f7f7;
 }
 
 .button:hover {
-  background: #e63939;
+  background: #ff4d4d;
 }
 
 
@@ -105,26 +43,21 @@
 
 /* ---------------------Btn-------------------------------- */
 .button {
-  margin-top: 15px;
+  margin-top: 10px;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 50px;
   background-color: rgb(20, 20, 20);
   border: none;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition-duration: .3s;
-  overflow: hidden;
-  position: relative;
 }
 
+.button:hover{
+  transform: scale(1.1);
+}
 
 .button:active {
   letter-spacing: 3px;
-  background-color: hsl(2, 83%, 41%);
+  background-color: #FF2C2C;
   color: hsl(0, 0%, 100%);
   box-shadow: rgb(255, 69, 69) 0px 0px 0px 0px;
   transform: translateY(10px);
@@ -132,34 +65,6 @@
 }
 /* ---------------------Btn-------------------------------- */
 
-.departamentos {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-    padding-top: 10px;
-    margin-top: 5px;
-    
-}
-
-.dep {
-  background: linear-gradient(45deg, rgb(0, 0, 0) 0%, rgb(112, 112, 112) 100%);
-  padding: 5px 8px;
-  border-radius: 6px;
-  margin-top: 4px;
-  width: 290px;
-  font-size: 25px;
-  transition: all 1s ease;
-}
-
-.dep:hover {
-  background: linear-gradient(45deg, rgb(16, 137, 211) 0%, rgb(73, 169, 247) 100%);
-  padding: 5px 8px;
-  border-radius: 6px;
-  margin-top: 4px;
-  width: 291px;
-  font-size: 25px;
-}
 
 
 Wrapper para scroll en mobile
@@ -196,7 +101,7 @@ Wrapper para scroll en mobile
 /* Filas */
 .shuffle-table td {
   padding: 14px;
-  text-align: center;
+  justify-content: center;
   font-size: 1rem;
   color: #333;
   border-bottom: 1px solid #e0e0e0;
@@ -235,6 +140,10 @@ Wrapper para scroll en mobile
   .shuffle-table thead {
     display: none;
   }
+
+  .shuffle-table tbody tr:hover {
+  background: #fff;
+}
 
   /* Card */
 
@@ -312,6 +221,5 @@ Wrapper para scroll en mobile
 }
 
 }
-
 
 

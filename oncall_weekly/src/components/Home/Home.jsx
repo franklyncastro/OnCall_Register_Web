@@ -1,5 +1,4 @@
 import '../../../src/style/Home.css'
-import RataLoading from '../RataLoading/RataLoading'
 import TextType from '../TypeText/Typetext'
 
 

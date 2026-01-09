@@ -54,7 +54,7 @@ function ResultadosCard({ asignaciones, setAsignaciones }) {
                 <th>Core</th>
                 <th>Desde</th>
                 <th>Hasta</th>
-                <th>Acción</th>
+                <th>Eliminar</th>
               </tr>
             </thead>
 

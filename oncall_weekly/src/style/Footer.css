@@ -18,3 +18,11 @@
 .app-footer strong {
   color: #e60000; /* rojo suave estilo tu preferencia */
 }
+
+@media (max-width: 768px){
+  .app-footer{
+    
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+}
