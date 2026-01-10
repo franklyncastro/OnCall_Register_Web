@@ -12,3 +12,12 @@
   --border-color: #333;
 }
 
+:root {
+  /* --table-header-bg: #f1f3f5; */
+  /* --text-color: #212529; */
+}
+
+[data-bs-theme="dark"] {
+  /* --table-header-bg: #2b2f36; */
+  /* --text-color: #f8f9fa; */
+}

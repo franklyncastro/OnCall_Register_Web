@@ -1,0 +1,24 @@
+.calendarWrapper {
+  background: var(--card-bg);
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  font-size: 1.4rem;
+  
+}
+
+:global(.react-calendar) {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+}
+
+:global(.react-calendar__tile) {
+  border-radius: 8px;
+}
+
+:global(.react-calendar__tile--active) {
+  background: #0d6efd;
+  color: white;
+}

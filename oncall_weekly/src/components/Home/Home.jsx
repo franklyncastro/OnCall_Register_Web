@@ -1,18 +1,17 @@
-import './Home.module.css'
-import TextType from '../TypeText/Typetext'
+import OnCallActualCard from "../OnCallActualCard/OnCallActualCard";
+import OnCallCalendar from "../OnCallCalendar/OnCallCalendar";
+import styles from "./Home.module.css";
 
-
-export default function Home() {
+export default function Home({ asignaciones }) {
   return (
-    <div className='container_home'>
-        <TextType 
-          text={["La disciplina ", "tarde o temprano", "supera al talento.!"]}
-          typingSpeed={75}
-          pauseDuration={1500}
-          showCursor={true}
-          cursorCharacter="|"
-        />
+    <div className={styles.container}>
+      <div className={styles.left}>
+        <OnCallActualCard asignaciones={asignaciones} />
+      </div>
 
+      <div className={styles.right}>
+        <OnCallCalendar />
+      </div>
     </div>
-  )
+  );
 }

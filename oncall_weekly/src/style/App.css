@@ -27,3 +27,13 @@ body {
   flex-direction: column;
 }
 
+button,
+span,
+li,
+div,
+h1,
+p,
+a {
+  /* user-select: none; */
+  caret-color: transparent;
+}

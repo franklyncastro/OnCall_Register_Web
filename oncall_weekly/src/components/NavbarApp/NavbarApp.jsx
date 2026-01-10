@@ -1,12 +1,7 @@
-import {
-  Navbar,
-  Nav,
-  Container,
-  Button,
-  NavDropdown,
-} from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "./NavbarApp.module.css";
+
 
 function Navigation({ theme, toggleTheme }) {
   return (
@@ -17,15 +12,23 @@ function Navigation({ theme, toggleTheme }) {
       className={styles.navbar}
     >
       <Container>
+        {/* BRAND */}
         <Navbar.Brand as={Link} to="/">
-          Core Network App
+          Core Network App{" "}
+           <img src="/core.png" alt="logo" width={30} />
         </Navbar.Brand>
 
         <Navbar.Toggle />
         <Navbar.Collapse>
+          {/* LINKS */}
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/users">Usuarios</Nav.Link>
-            <Nav.Link as={Link} to="/results">OnCall</Nav.Link>
+            <Nav.Link as={Link} to="/users">
+              Usuarios
+            </Nav.Link>
+
+            <Nav.Link as={Link} to="/results">
+              OnCall
+            </Nav.Link>
 
             <NavDropdown title="Agregar">
               <NavDropdown.Item as={Link} to="/add">
@@ -37,12 +40,18 @@ function Navigation({ theme, toggleTheme }) {
             </NavDropdown>
           </Nav>
 
-          <Button
-            variant={theme === "dark" ? "light" : "dark"}
-            onClick={toggleTheme}
-          >
-            {theme === "dark" ? "☀️" : "🌙"}
-          </Button>
+          {/* SWITCH MODO OSCURO */}
+          <label className={styles.uiSwitch}>
+            <input
+              type="checkbox"
+              checked={theme === "dark"}
+              onChange={toggleTheme}
+              aria-label="Cambiar modo oscuro"
+            />
+            <div className={styles.slider}>
+              <div className={styles.circle}></div>
+            </div>
+          </label>
         </Navbar.Collapse>
       </Container>
     </Navbar>

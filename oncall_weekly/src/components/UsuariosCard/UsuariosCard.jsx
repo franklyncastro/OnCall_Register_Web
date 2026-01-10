@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { Table, Button, Spinner, Form, Stack } from "react-bootstrap";
+import {
+  Table,
+  Button,
+  Spinner,
+  Form,
+  Stack,
+  Container,
+  Card,
+} from "react-bootstrap";
 import {
   collection,
   getDocs,
@@ -83,85 +91,95 @@ function UsuariosCard({ refrescarNombres }) {
   }
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Usuarios Registrados</h2>
+    <Container fluid className="py-4">
+      <Card className={styles.card}>
+        <Card.Header className={styles.header}>
+          Usuarios Registrados
+        </Card.Header>
 
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Departamento</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
+        <Card.Body>
+          <div className="table-responsive">
+            <Table hover bordered className={styles.table}>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Departamento</th>
+                  <th className="text-center">Acciones</th>
+                </tr>
+              </thead>
 
-        <tbody>
-          {usuarios.map((u) => (
-            <tr key={u.id}>
-              <td>
-                {editandoId === u.id ? (
-                  <Form.Control
-                    value={nuevoNombre}
-                    onChange={(e) => setNuevoNombre(e.target.value)}
-                  />
-                ) : (
-                  u.nombre
-                )}
-              </td>
+              <tbody>
+                {usuarios.map((u) => (
+                  <tr key={u.id}>
+                    <td>
+                      {editandoId === u.id ? (
+                        <Form.Control
+                          size="sm"
+                          value={nuevoNombre}
+                          onChange={(e) => setNuevoNombre(e.target.value)}
+                        />
+                      ) : (
+                        u.nombre
+                      )}
+                    </td>
 
-              <td>
-                {editandoId === u.id ? (
-                  <Form.Select
-                    value={nuevoTipo}
-                    onChange={(e) => setNuevoTipo(e.target.value)}
-                  >
-                    <option value="">Selecciona</option>
-                    <option value="switch">Switch</option>
-                    <option value="core">Core</option>
-                  </Form.Select>
-                ) : (
-                  u.tipo
-                )}
-              </td>
+                    <td>
+                      {editandoId === u.id ? (
+                        <Form.Select
+                          size="sm"
+                          value={nuevoTipo}
+                          onChange={(e) => setNuevoTipo(e.target.value)}
+                        >
+                          <option value="">Selecciona</option>
+                          <option value="Switch">Switch</option>
+                          <option value="Core">Core</option>
+                        </Form.Select>
+                      ) : (
+                        u.tipo
+                      )}
+                    </td>
 
-              <td>
-                {editandoId === u.id ? (
-                  <Stack direction="horizontal" gap={2}>
-                    <Button size="sm" onClick={() => guardarEdicion(u.id)}>
-                      Guardar
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="secondary"
-                      onClick={() => setEditandoId(null)}
-                    >
-                      Cancelar
-                    </Button>
-                  </Stack>
-                ) : (
-                  <Stack direction="horizontal" gap={2}>
-                    <Button
-                      size="sm"
-                      variant="outline-primary"
-                      onClick={() => editarUsuario(u)}
-                    >
-                      Editar
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline-danger"
-                      onClick={() => eliminarUsuario(u.id)}
-                    >
-                      Eliminar
-                    </Button>
-                  </Stack>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
+                    <td>
+                      {editandoId === u.id ? (
+                        <Stack direction="horizontal" gap={2} className="justify-content-center">
+                          <Button size="sm" onClick={() => guardarEdicion(u.id)}>
+                            Guardar
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="secondary"
+                            onClick={() => setEditandoId(null)}
+                          >
+                            Cancelar
+                          </Button>
+                        </Stack>
+                      ) : (
+                        <Stack direction="horizontal" gap={2} className="justify-content-center">
+                          <Button
+                            size="sm"
+                            variant="outline-primary"
+                            onClick={() => editarUsuario(u)}
+                          >
+                            Editar
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline-danger"
+                            onClick={() => eliminarUsuario(u.id)}
+                          >
+                            Eliminar
+                          </Button>
+                        </Stack>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </Card.Body>
+      </Card>
+    </Container>
   );
 }
 

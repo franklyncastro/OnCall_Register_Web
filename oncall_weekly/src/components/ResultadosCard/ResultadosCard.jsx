@@ -1,19 +1,8 @@
-import { useEffect, useState } from "react";
 import { Table, Button, Spinner } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase/config";
 import styles from "./ResultadosCard.module.css";
 
-function ResultadosCard({ asignaciones, setAsignaciones }) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (asignaciones) {
-      setLoading(false);
-    }
-  }, [asignaciones]);
-
+function ResultadosCard({ asignaciones, setAsignaciones, loading }) {
   const formatearFecha = (fechaISO) => {
     const fecha = new Date(fechaISO + "T00:00:00");
     return fecha.toLocaleDateString("es-ES", {
@@ -24,16 +13,13 @@ function ResultadosCard({ asignaciones, setAsignaciones }) {
 
   const eliminarSemana = (id) => {
     Swal.fire({
-      title: "¿Eliminar semana?",
+      title: "¿Eliminar OnCall?",
       text: "Esta acción no se puede deshacer.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Eliminar",
-      cancelButtonText: "Cancelar",
-    }).then(async (result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
-        await deleteDoc(doc(db, "asignaciones", id));
-
         setAsignaciones((prev) => prev.filter((a) => a.id !== id));
 
         Swal.fire({
@@ -61,7 +47,12 @@ function ResultadosCard({ asignaciones, setAsignaciones }) {
       {asignaciones.length === 0 ? (
         <p className={styles.empty}>No hay registros aún.</p>
       ) : (
-        <Table striped bordered hover responsive>
+        <Table
+          striped
+          hover
+          responsive
+          className={styles.table}
+        >
           <thead>
             <tr>
               <th>Switch</th>
@@ -71,18 +62,19 @@ function ResultadosCard({ asignaciones, setAsignaciones }) {
               <th>Acción</th>
             </tr>
           </thead>
+
           <tbody>
-            {asignaciones.map((s) => (
-              <tr key={s.id}>
-                <td>{s.switch}</td>
-                <td>{s.core}</td>
-                <td>{formatearFecha(s.inicio)}</td>
-                <td>{formatearFecha(s.fin)}</td>
+            {asignaciones.map((a) => (
+              <tr key={a.id}>
+                <td>{a.switch}</td>
+                <td>{a.core}</td>
+                <td>{formatearFecha(a.inicio)}</td>
+                <td>{formatearFecha(a.fin)}</td>
                 <td>
                   <Button
                     size="sm"
                     variant="outline-danger"
-                    onClick={() => eliminarSemana(s.id)}
+                    onClick={() => eliminarSemana(a.id)}
                   >
                     Eliminar
                   </Button>

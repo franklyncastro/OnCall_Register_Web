@@ -26,7 +26,7 @@ function AppRoutes({
 
       <div className="main-container">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home asignaciones={asignaciones}/>} />
 
           <Route
             path="/selection"
