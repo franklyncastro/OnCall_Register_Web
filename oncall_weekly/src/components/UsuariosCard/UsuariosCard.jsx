@@ -94,7 +94,7 @@ function UsuariosCard({ refrescarNombres }) {
     <Container fluid className="py-4">
       <Card className={styles.card}>
         <Card.Header className={styles.header}>
-          Usuarios Registrados
+          <i class="fa-solid fa-users"></i> Usuarios Registrados
         </Card.Header>
 
         <Card.Body>

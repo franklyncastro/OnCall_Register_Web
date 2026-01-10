@@ -1,9 +1,8 @@
 .navbar {
   padding: 0.8rem 1rem;
+  border: 1px solid #00000013;
 }
 
-/* From Uiverse.io by Galahhad */
-/* switch settings 👇 */
 
 .uiSwitch {
   --switch-bg: rgb(135, 150, 165);

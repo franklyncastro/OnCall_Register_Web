@@ -14,7 +14,7 @@ function Navigation({ theme, toggleTheme }) {
       <Container>
         {/* BRAND */}
         <Navbar.Brand as={Link} to="/">
-          Core Network App{" "}
+         <i class="fa-solid fa-hexagon-nodes"></i> Core Network App{" "}
            <img src="/core.png" alt="logo" width={30} />
         </Navbar.Brand>
 
@@ -23,19 +23,19 @@ function Navigation({ theme, toggleTheme }) {
           {/* LINKS */}
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/users">
-              Usuarios
+             <i class="fa-solid fa-users"></i> Usuarios
             </Nav.Link>
 
             <Nav.Link as={Link} to="/results">
-              OnCall
+              <i class="fa-solid fa-address-card"></i> Semana Oncall
             </Nav.Link>
 
             <NavDropdown title="Agregar">
               <NavDropdown.Item as={Link} to="/add">
-                Usuario
+                <i class="fa-solid fa-user-plus"></i> Usuario
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/selection">
-                OnCall
+               <i class="fa-solid fa-file-circle-plus"></i> OnCall
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

@@ -63,7 +63,7 @@ function ResultadosCard({ asignaciones, setAsignaciones, loading }) {
             </tr>
           </thead>
 
-          <tbody>
+          <tbody className={styles.tbody}>
             {asignaciones.map((a) => (
               <tr key={a.id}>
                 <td>{a.switch}</td>
@@ -75,6 +75,7 @@ function ResultadosCard({ asignaciones, setAsignaciones, loading }) {
                     size="sm"
                     variant="outline-danger"
                     onClick={() => eliminarSemana(a.id)}
+                    className={styles.btn}
                   >
                     Eliminar
                   </Button>
