@@ -1,4 +1,6 @@
 import { Table, Button, Spinner } from "react-bootstrap";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase/config";
 import Swal from "sweetalert2";
 import styles from "./ResultadosCard.module.css";
 
@@ -18,8 +20,12 @@ function ResultadosCard({ asignaciones, setAsignaciones, loading }) {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Eliminar",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
+        // ✅ Elimina de Firestore primero
+        await deleteDoc(doc(db, "asignaciones", id));
+
+        // ✅ Luego actualiza el estado local
         setAsignaciones((prev) => prev.filter((a) => a.id !== id));
 
         Swal.fire({
