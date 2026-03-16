@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
 import Home from "../components/Home/Home";
 import SeleccionCard from "../components/SeleccionCard/SeleccionCard";
 import ResultadosCard from "../components/ResultadosCard/ResultadosCard";
@@ -15,8 +14,8 @@ function AppRoutes({
   agregarAsignacion,
   nombresSwitch,
   nombresCore,
-  actualizarNombres,
-  obtenerNombres,
+  obtenerNombres,       
+  loadingAsignaciones,  
   theme,
   toggleTheme,
 }) {
@@ -26,7 +25,7 @@ function AppRoutes({
 
       <div className="main-container">
         <Routes>
-          <Route path="/" element={<Home asignaciones={asignaciones}/>} />
+          <Route path="/" element={<Home asignaciones={asignaciones} />} />
 
           <Route
             path="/selection"
@@ -42,7 +41,11 @@ function AppRoutes({
 
           <Route
             path="/add"
-            element={<RegisterUser actualizarNombres={actualizarNombres} />}
+            element={
+              <RegisterUser
+                obtenerNombres={obtenerNombres} 
+              />
+            }
           />
 
           <Route
@@ -56,6 +59,7 @@ function AppRoutes({
               <ResultadosCard
                 asignaciones={asignaciones}
                 setAsignaciones={setAsignaciones}
+                loading={loadingAsignaciones} 
               />
             }
           />

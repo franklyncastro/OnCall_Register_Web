@@ -1,45 +1,36 @@
 import { useState } from "react";
 import { Form, Button, Card } from "react-bootstrap";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore"; 
 import { db } from "../../firebase/config";
-import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 import styles from "./RegisterUser.module.css";
 
-function RegisterUser({ actualizarNombres }) {
+function RegisterUser({ obtenerNombres }) { 
   const [nombre, setNombre] = useState("");
   const [tipo, setTipo] = useState("");
   const [loading, setLoading] = useState(false);
 
   const manejarGuardar = async () => {
     if (!nombre || !tipo) {
-      Swal.fire("Campos incompletos", "Completa todos los campos", "error");
+      toast.error("Completa todos los campos");
       return;
     }
 
     try {
       setLoading(true);
-
       await addDoc(collection(db, "departamentos"), {
         nombre,
-        tipo,
+        tipo: tipo.toLowerCase(), 
       });
 
-      const querySnapshot = await getDocs(collection(db, "departamentos"));
-      const data = querySnapshot.docs.map((doc) => doc.data());
-      actualizarNombres(data);
+      await obtenerNombres(); 
 
-      Swal.fire({
-        icon: "success",
-        title: "Usuario agregado",
-        timer: 1500,
-        showConfirmButton: false,
-      });
-
+      toast.success("Usuario agregado correctamente");
       setNombre("");
       setTipo("");
     // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      Swal.fire("Error", "No se pudo agregar el usuario", "error");
+      toast.error("No se pudo agregar el usuario");
     } finally {
       setLoading(false);
     }
@@ -49,17 +40,11 @@ function RegisterUser({ actualizarNombres }) {
     <div className={styles.container}>
       <Card className={styles.card}>
         <Card.Body>
-          <Card.Title className={styles.title}>
-            Agregar Usuario
-          </Card.Title>
-
+          <Card.Title className={styles.title}>Agregar Usuario</Card.Title>
           <Form>
             <Form.Group className="mb-3">
               <Form.Label>Departamento</Form.Label>
-              <Form.Select
-                value={tipo}
-                onChange={(e) => setTipo(e.target.value)}
-              >
+              <Form.Select value={tipo} onChange={(e) => setTipo(e.target.value)}>
                 <option value="">Selecciona</option>
                 <option value="switch">Switch</option>
                 <option value="core">Core</option>
@@ -76,11 +61,7 @@ function RegisterUser({ actualizarNombres }) {
               />
             </Form.Group>
 
-            <Button
-              className="w-100"
-              onClick={manejarGuardar}
-              disabled={loading}
-            >
+            <Button className="w-100" onClick={manejarGuardar} disabled={loading}>
               {loading ? "Guardando..." : "Guardar Usuario"}
             </Button>
           </Form>

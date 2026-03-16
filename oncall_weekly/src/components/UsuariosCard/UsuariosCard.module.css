@@ -1,84 +1,119 @@
 .card {
-  max-width: 1400px;
-  margin: auto;
-  border-radius: 14px;
-  border: none;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 960px;
+  border-radius: 16px !important;
+  border: 0.5px solid var(--border-color) !important;
+  overflow: hidden;
+  background: var(--card-bg) !important;
 }
-
 
 .header {
-  font-size: 1.4rem;
-  font-weight: 600;
-  padding: 1rem 1.25rem;
-  background: transparent;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 24px;
+  background: var(--card-bg) !important;
+  border-bottom: 0.5px solid var(--border-color) !important;
+  color: var(--text-color) !important;
   text-align: center;
 }
 
 .table {
-  font-size: 0.95rem;
-
+  width: 100%;
+  background: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  margin: 0;
 }
 
-.table th {
-  background-color: var(--table-header-bg);
-  color: var(--text-color);
-  font-weight: 600;
-  text-align: center;
-  white-space: nowrap;
-  font-size: 1.2rem;
+.table thead th {
+  background: var(--table-header-bg) !important;
+  color: var(--text-muted) !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 12px 24px;
+  border-bottom: 0.5px solid var(--border-color) !important;
+  border-top: none !important;
 }
 
-.table td {
+.table tbody td {
+  padding: 14px 24px;
   vertical-align: middle;
-  text-align: center;
+  border-color: var(--border-color) !important;
+  font-size: 16px;
+  color: var(--text-color) !important;
+  background: var(--card-bg) !important;
 }
 
-.loading {
-  min-height: 60vh;
-  display: flex;
+.avatar {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1a3a5c;
+  color: #7eb8f7;
+  font-size: 11px;
+  font-weight: 700;
+  margin-right: 12px;
+  flex-shrink: 0;
 }
 
-
-
-.container {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.title {
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  color: var(--text-color);
-}
-
-.table {
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.table thead {
-  background-color: var(--table-header-bg);
-}
-
-.table th,
-.table td {
-  vertical-align: middle;
-  padding: 0.75rem;
-}
-
-.actions {
+.nameCell {
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
 }
 
-/* 🔹 LOADING */
+.deptBadge {
+  font-size: 14px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.deptSwitch {
+  background: var(--badge-switch-bg);
+  color: var(--badge-switch-color);
+}
+
+.deptCore {
+  background: var(--badge-core-bg);
+  color: var(--badge-core-color);
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 0.5px solid;
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.15s ease;
+}
+
+.btnEdit {
+  color: #378add;
+  border-color: #378add;
+  margin-right: 8px;
+}
+
+.btnEdit:hover { background: #0c447c22; }
+
+.btnDelete {
+  color: #e24b4a;
+  border-color: #e24b4a;
+}
+
+.btnDelete:hover { background: #a32d2d22; }
+
 .loading {
   display: flex;
   justify-content: center;
@@ -86,16 +121,10 @@
   min-height: 200px;
 }
 
-/* 📱 CELULARES */
-@media (max-width: 767px) {
-  .container {
-    padding: 1rem;
-  }
-
-}
-@media (max-width: 440px) {
-  .container {
-    padding: 1rem;    
-  }
-
+@media (max-width: 600px) {
+  .table thead th,
+  .table tbody td { padding: 10px 12px; }
+  .actionBtn { width: 68px; height: 30px; font-size: 11px; }
+  .btnEdit { margin-right: 4px; }
+  .avatar { display: none; }
 }

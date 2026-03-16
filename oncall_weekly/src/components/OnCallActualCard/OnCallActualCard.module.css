@@ -3,73 +3,90 @@
   color: var(--text-color);
   padding: 24px;
   border-radius: 16px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border: 0.5px solid var(--border-color);
   height: 100%;
-  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.containerItems p{
-  border: none;
-  outline: none;
-  background-color: royalblue;
-  padding: 10px;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 1.3rem;
-  transform: .3s ease;
-
-}
-
-.containerItems p:hover{
-  background-color: rgb(56, 90, 194);
-  cursor: pointer;
-
+/* Acento visual superior */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #185fa5, #378add);
+  border-radius: 16px 16px 0 0;
 }
 
 .title {
-  font-size: 1.3rem;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
   margin-bottom: 20px;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.titleH3{
-
+.title::after {
+  content: "";
+  flex: 1;
+  height: 0.5px;
+  background: var(--border-color);
 }
 
 .item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 12px 0;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 0.5px solid var(--border-color);
+  font-size: 15px;
 }
 
-.item span {
-  opacity: 0.7;
+.item:last-child {
+  border-bottom: none;
 }
 
-.dates {
+.itemKey {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.itemVal {
+  font-weight: 500;
+  color: var(--text-color);
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
 }
 
-.dates span {
-  display: block;
-  font-size: 0.85rem;
-  opacity: 0.7;
+.badge {
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.badgeSwitch {
+  background: var(--badge-switch-bg);
+  color: var(--badge-switch-color);
+}
+
+.badgeCore {
+  background: var(--badge-core-bg);
+  color: var(--badge-core-color);
 }
 
 .empty {
-  opacity: 0.7;
+  color: var(--text-muted);
+  font-size: 13px;
   text-align: center;
-  margin-top: 20px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .dates {
-    flex-direction: column;
-    gap: 12px;
-  }
+  margin-top: 24px;
 }

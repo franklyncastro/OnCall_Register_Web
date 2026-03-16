@@ -4,12 +4,12 @@ import {Link} from 'react-router-dom'
 export default function Error() {
   return (
 
-    <div class="tv-container">
-      <div class="tv-screen">
-        <div class="static"></div>
+    <div callsName="tv-container">
+      <div callsName="tv-screen">
+        <div callsName="static"></div>
         <Link to='/'>
           
-        <div class="error-text">
+        <div callsName="error-text">
           ERROR
           <br />
           404
@@ -18,7 +18,7 @@ export default function Error() {
         </div>
         </Link>
       </div>
-      <div class="tv-stand"></div>
+      <div callsName="tv-stand"></div>
 
     
     </div>

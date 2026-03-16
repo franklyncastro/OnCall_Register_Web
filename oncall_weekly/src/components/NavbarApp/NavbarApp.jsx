@@ -14,7 +14,7 @@ function Navigation({ theme, toggleTheme }) {
       <Container>
         {/* BRAND */}
         <Navbar.Brand as={Link} to="/">
-         <i class="fa-solid fa-hexagon-nodes"></i> Core Network App{" "}
+         <i className="fa-solid fa-hexagon-nodes"></i> Core Network App{" "}
            <img src="/core.png" alt="logo" width={30} />
         </Navbar.Brand>
 
@@ -22,20 +22,21 @@ function Navigation({ theme, toggleTheme }) {
         <Navbar.Collapse>
           {/* LINKS */}
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/users">
-             <i class="fa-solid fa-users"></i> Usuarios
+            <Nav.Link as={Link} to="/results">
+              <i className="fa-solid fa-address-card"></i> Semana Oncall
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/results">
-              <i class="fa-solid fa-address-card"></i> Semana Oncall
+            <Nav.Link as={Link} to="/users">
+             <i className="fa-solid fa-users"></i> Usuarios
             </Nav.Link>
 
             <NavDropdown title="Agregar">
-              <NavDropdown.Item as={Link} to="/add">
-                <i class="fa-solid fa-user-plus"></i> Usuario
-              </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/selection">
-               <i class="fa-solid fa-file-circle-plus"></i> OnCall
+               <i className="fa-solid fa-file-circle-plus"></i> OnCall
+              </NavDropdown.Item>
+              
+              <NavDropdown.Item as={Link} to="/add">
+                <i className="fa-solid fa-user-plus"></i> Usuario
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

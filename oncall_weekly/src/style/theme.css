@@ -1,15 +1,33 @@
 :root {
-  --bg-color: #f8f9fa;
+  --bg-color: #f5f5f3;
   --card-bg: #ffffff;
-  --text-color: #212529;
-  --border-color: #dee2e6;
+  --text-color: #1a1a1a;
+  --text-muted: #6b7280;
+  --border-color: #e5e7eb;
+  --table-header-bg: #f9fafb;
+  --badge-switch-bg: #faeeda;
+  --badge-switch-color: #854f0b;
+  --badge-core-bg: #e1f5ee;
+  --badge-core-color: #0f6e56;
+  --btn-primary: #185fa5;
+  --btn-primary-hover: #0c447c;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
 }
 
 [data-theme="dark"] {
-  --bg-color: #121212;
-  --card-bg: #1e1e1e;
+  --bg-color: #111111;
+  --card-bg: #1c1c1c;
   --text-color: #f1f1f1;
-  --border-color: #333;
+  --text-muted: #9ca3af;
+  --border-color: #2a2a2a;
+  --table-header-bg: #161616;
+  --badge-switch-bg: #412402;
+  --badge-switch-color: #fac775;
+  --badge-core-bg: #04342c;
+  --badge-core-color: #9fe1cb;
+  --btn-primary: #185fa5;
+  --btn-primary-hover: #378add;
+  --input-bg: #252525;
+  --input-border: #3a3a3a;
 }
-
-

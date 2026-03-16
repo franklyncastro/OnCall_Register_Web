@@ -1,39 +1,26 @@
-body {
-  color: #fff;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-
-  /* font */
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: weight;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 300;
-}
-
-.main-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-
 .app-layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-button,
-span,
-li,
-div,
-h1,
-p,
-a {
-  /* user-select: none; */
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .main-container { padding: 20px 16px; }
+}
+
+@media (max-width: 480px) {
+  .main-container { padding: 16px 12px; }
+}
+
+button, span, li, div, h1, p, a {
   caret-color: transparent;
 }
