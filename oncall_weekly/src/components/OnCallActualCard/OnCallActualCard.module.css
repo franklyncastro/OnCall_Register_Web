@@ -90,3 +90,30 @@
   text-align: center;
   margin-top: 24px;
 }
+
+
+.btnEmail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 16px;
+  background: var(--btn-primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-decoration: none;
+}
+
+.btnEmail:hover {
+  background: var(--btn-primary-hover);
+}
+
+.btnEmail:active {
+  transform: scale(0.98);
+}
