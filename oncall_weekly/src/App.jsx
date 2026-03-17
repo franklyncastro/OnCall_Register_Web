@@ -2,13 +2,16 @@ import { useState, useEffect } from "react";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db } from "./firebase/config";
 import AppRoutes from "./routes/AppRoutes ";
+import { useAuth } from "./auth/useAuth";
 import "./style/App.css";
 
 function App() {
   const [asignaciones, setAsignaciones] = useState([]);
   const [nombresSwitch, setNombresSwitch] = useState([]);
   const [nombresCore, setNombresCore] = useState([]);
-  const [loadingAsignaciones, setLoadingAsignaciones] = useState(true); // ✅ nuevo
+  const [loadingAsignaciones, setLoadingAsignaciones] = useState(true);
+
+  const { isAuthenticated, login, logout } = useAuth(); // ✅
 
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -20,12 +23,12 @@ function App() {
   const toggleTheme = () => setTheme((prev) => (prev === "light" ? "dark" : "light"));
 
   const obtenerAsignaciones = async () => {
-    setLoadingAsignaciones(true); // ✅
+    setLoadingAsignaciones(true);
     const querySnapshot = await getDocs(collection(db, "asignaciones"));
     const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     data.sort((a, b) => new Date(a.inicio) - new Date(b.inicio));
     setAsignaciones(data);
-    setLoadingAsignaciones(false); 
+    setLoadingAsignaciones(false);
   };
 
   const agregarAsignacion = async (asignacion) => {
@@ -33,7 +36,6 @@ function App() {
     obtenerAsignaciones();
   };
 
- 
   const obtenerNombres = async () => {
     const querySnapshot = await getDocs(collection(db, "departamentos"));
     const data = querySnapshot.docs.map((doc) => doc.data());
@@ -54,9 +56,12 @@ function App() {
       nombresSwitch={nombresSwitch}
       nombresCore={nombresCore}
       obtenerNombres={obtenerNombres}
-      loadingAsignaciones={loadingAsignaciones} // ✅
+      loadingAsignaciones={loadingAsignaciones}
       theme={theme}
       toggleTheme={toggleTheme}
+      isAuthenticated={isAuthenticated} 
+      onLogin={login}                   
+      onLogout={logout}                 
     />
   );
 }
