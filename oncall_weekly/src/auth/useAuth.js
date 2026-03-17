@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const ADMIN_USER = "admincore";
-const ADMIN_PASS = "c0r3n3tw0rk2026"; 
+const ADMIN_PASS = "core2026$%?"; 
 
 export function useAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(
