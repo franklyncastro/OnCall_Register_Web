@@ -1,0 +1,112 @@
+.card {
+  background: var(--card-bg);
+  color: var(--text-color);
+  padding: 24px;
+  border-radius: 16px;
+  border: 0.5px solid var(--border-color);
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Acento verde para diferenciar de la semana actual */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0f6e56, #1d9e75);
+  border-radius: 16px 16px 0 0;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title::after {
+  content: "";
+  flex: 1;
+  height: 0.5px;
+  background: var(--border-color);
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 0.5px solid var(--border-color);
+  font-size: 15px;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.itemKey {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.itemVal {
+  font-weight: 700;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.badge {
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.badgeSwitch {
+  background: var(--badge-switch-bg);
+  color: var(--badge-switch-color);
+}
+
+.badgeCore {
+  background: var(--badge-core-bg);
+  color: var(--badge-core-color);
+}
+
+.btnEmail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 16px;
+  background: #0f6e56;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btnEmail:hover { background: #085041; }
+.btnEmail:active { transform: scale(0.98); }
+
+.empty {
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
+  margin-top: 24px;
+}

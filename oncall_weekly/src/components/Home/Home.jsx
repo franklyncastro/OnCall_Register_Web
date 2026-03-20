@@ -1,5 +1,5 @@
 import OnCallActualCard from "../OnCallActualCard/OnCallActualCard";
-import OnCallCalendar from "../OnCallCalendar/OnCallCalendar";
+import OnCallProximaCard from "../OnCallProximaCard/OnCallProximaCard";
 import styles from "./Home.module.css";
 
 export default function Home({ asignaciones }) {
@@ -8,9 +8,8 @@ export default function Home({ asignaciones }) {
       <div className={styles.left}>
         <OnCallActualCard asignaciones={asignaciones} />
       </div>
-
       <div className={styles.right}>
-        <OnCallCalendar />
+        <OnCallProximaCard asignaciones={asignaciones} />
       </div>
     </div>
   );
