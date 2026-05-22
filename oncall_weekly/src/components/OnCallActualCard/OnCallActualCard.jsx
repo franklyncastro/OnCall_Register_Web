@@ -1,6 +1,9 @@
+import { useState } from "react";
 import styles from "./OnCallActualCard.module.css";
+import ReporteModal from "../ReporteModal/ReporteModal";
 
 function OnCallActualCard({ asignaciones = [] }) {
+  const [mostrarReporte, setMostrarReporte] = useState(false);
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
 
@@ -39,27 +42,47 @@ function OnCallActualCard({ asignaciones = [] }) {
             <span className={styles.itemKey}>Switch</span>
             <span className={styles.itemVal}>
               {onCallSemana.switch}
-              <span className={`${styles.badge} ${styles.badgeSwitch}`}>Switch</span>
+              <span className={`${styles.badge} ${styles.badgeSwitch}`}>
+                Switch
+              </span>
             </span>
           </div>
           <div className={styles.item}>
             <span className={styles.itemKey}>Core</span>
             <span className={styles.itemVal}>
               {onCallSemana.core}
-              <span className={`${styles.badge} ${styles.badgeCore}`}>Core</span>
+              <span className={`${styles.badge} ${styles.badgeCore}`}>
+                Core
+              </span>
             </span>
           </div>
           <div className={styles.item}>
             <span className={styles.itemKey}>Desde</span>
-            <span className={styles.itemVal}>{formatearFecha(onCallSemana.inicio)}</span>
+            <span className={styles.itemVal}>
+              {formatearFecha(onCallSemana.inicio)}
+            </span>
           </div>
           <div className={styles.item}>
             <span className={styles.itemKey}>Hasta</span>
-            <span className={styles.itemVal}>{formatearFecha(onCallSemana.fin)}</span>
+            <span className={styles.itemVal}>
+              {formatearFecha(onCallSemana.fin)}
+            </span>
           </div>
         </>
       ) : (
         <p className={styles.empty}>No hay OnCall asignado esta semana.</p>
+      )}
+
+      {/* ✅ Botón reporte */}
+      <button
+        className={styles.btnReporte}
+        onClick={() => setMostrarReporte(true)}
+      >
+        <i className="fa-solid fa-chart-bar me-2"></i>
+        Reporte de esta semana
+      </button>
+      {mostrarReporte && (
+        <ReporteModal onClose={() => setMostrarReporte(false)} />
       )}
     </div>
   );
