@@ -1,10 +1,9 @@
 import styles from "./ReporteModal.module.css";
 
-const CORE_TEAM = ["Luis Feliz", "Rafael Humberto", "Anglis Mercedes"];
+const CORE_TEAM = ["Anglis Mercedes", "Luis Feliz", "Rafael Humberto"];
 const SWITCH_TEAM = ["Jose Suarez", "Franklyn Castro"];
 
-// Semana de referencia: lunes 19 mayo 2026
-// En esa semana: Core index 1 (Anglis), Switch index 0 (Jose)
+
 const REFERENCIA = new Date("2026-05-19T00:00:00");
 const CORE_REF_INDEX = 1;
 const SWITCH_REF_INDEX = 0;
