@@ -1,6 +1,6 @@
 import styles from "./ReporteModal.module.css";
 
-const CORE_TEAM = ["Rafael Humberto", "Luis Feliz", "Anglis Mercedes", ];
+const CORE_TEAM = ["Luis Feliz", "Rafael Humberto", "Anglis Mercedes"];
 const SWITCH_TEAM = ["Jose Suarez", "Franklyn Castro"];
 
 // Semana de referencia: lunes 19 mayo 2026
